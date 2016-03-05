@@ -1,5 +1,5 @@
 # pyphoon
-Phase of the Moon (Python version)
+ASCII Art Phase of the Moon (Python version)
 
 ![Screenshots](http://igor.chub.in/pyphoon/screenshot.png)
 
