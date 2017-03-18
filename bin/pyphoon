@@ -162,13 +162,13 @@ args = vars(parser.parse_args())
 
 try:
     d = time.mktime( dateutil.parser.parse(args['date']).timetuple() )
-except Exception, e:
+except Exception as e:
     fatal("Can't parse date: %s" % args['date'])
 
 try:
     n = int( args['lines'] )
-except Exception, e:
-    print e
+except Exception as e:
+    print(e)
     fatal("Number of lines must be integer")
-print putmoon( d, n, '@' )
+print(putmoon( d, n, '@' ))
 
