@@ -46,3 +46,8 @@ Displayed information:
 
 * dateutil
 
+# Own changes
+
+There are several changes in PyPhoon that were not present in the original Jef Pokazner's version of 1979:
+
+* Localization: pyphoon is translated into many languages; language is configured using the system locale (`$LANG`)
