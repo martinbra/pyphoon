@@ -13,12 +13,14 @@ import argparse
 import datetime
 import dateutil.parser
 import time
+import locale
 
 from math import cos, sqrt
 
 sys.path.append(os.path.join(os.path.dirname( os.path.dirname(__file__) ), "lib"))
 from astro import unix_to_julian, phase, phasehunt2
 from moons import background6, background18, background19, background21, background22, background23, background24, background29, background32
+from translations import LITS
 
 def fatal( message ):
     print >>sys.stderr, message
@@ -58,18 +60,20 @@ def putmoon( t, numlines, atfiller ):
     def fputs(s):  
       output[0] += s
 
-    qlits = [
-        "New Moon +     ",
-        "First Quarter +",
-        "Full Moon +    ",
-        "Last Quarter + ",
-    ]
-    nqlits = [
-        "New Moon -     ",
-        "First Quarter -",
-        "Full Moon -    ",
-        "Last Quarter - ",
-    ]
+    lang = 'en'
+    try: 
+        lang = locale.getdefaultlocale()[0]
+    except:
+        pass
+
+    if not lang:
+        lang = 'en'
+    if '_' in lang:
+        lang = lang.split('_', 1)[0]
+
+    lits = LITS.get(lang, LITS.get('en'))
+    qlits = [ x + " +" for x in lits ]
+    nqlits = [ x + " -" for x in lits ]
 
     # Find the length of the atfiller string
     atflrlen = len( atfiller )
