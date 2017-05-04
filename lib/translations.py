@@ -22,4 +22,5 @@ LITS = {
     'sk': [ "Nov",          "Prvá štvrť",       "Úplnok",       "Posledná štvrť"    ],
     'sr': [ "Mlađak",       "Prva četvrt",      "Uštap",        "Poslednja četvrt"  ],
     'uk': [ "Молодик",      "Перша чверть",     "Повня",        "Остання чверть"    ],
+    'ko': [ "초승달",      "상현달",     "보름달",        "하현달"    ],
 }
