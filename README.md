@@ -10,7 +10,7 @@ written in Pascal in 1979 (and later translated by himself into C, and now by me
 
 ~~~~
 $ pyphoon --help
-usage: pyphoon [-h] [-n LINES] [date]
+usage: pyphoon [-h] [-n LINES] [-x] [-l [LANGUAGE]] [date]
 
 Show Phase of the Moon
 
@@ -22,7 +22,10 @@ optional arguments:
   -h, --help            show this help message and exit
   -n LINES, --lines LINES
                         Number of lines to display (size of the moon)
-
+  -x, --notext          Print no additional information, just the moon
+  -l [LANGUAGE], --language [LANGUAGE]
+                        locale for that the phase of the Moon must be shown.
+                        English by default
 ~~~~
 
 By default the number of lines is 30 and the date is today.
