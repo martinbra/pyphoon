@@ -67,7 +67,7 @@ def putmoon( t, numlines, atfiller, notext, lang=None ):
         except:
             lang = 'en'
 
-    if '_' in lang:
+    if lang not in LITS and '_' in lang:
         lang = lang.split('_', 1)[0]
 
     lits = LITS.get(lang, LITS.get('en'))
