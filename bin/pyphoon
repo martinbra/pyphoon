@@ -45,14 +45,14 @@ QUARTERLITLENPLUSONE = 17
 ASPECTRATIO = 0.5
 
 def putseconds( secs ):
-    days = secs / SECSPERDAY
-    secs = secs - days * SECSPERDAY
-    hours = secs / SECSPERHOUR
-    secs = secs - hours * SECSPERHOUR
-    minutes = secs / SECSPERMINUTE
-    secs = secs - minutes * SECSPERMINUTE
+    days = int(secs / SECSPERDAY)
+    secs = int(secs - days * SECSPERDAY)
+    hours = int(secs / SECSPERHOUR)
+    secs = int(secs - hours * SECSPERHOUR)
+    minutes = int(secs / SECSPERMINUTE)
+    secs = int(secs - minutes * SECSPERMINUTE)
 
-    return "%ld %2ld:%02ld:%02ld" % (days, hours, minutes, secs)
+    return "{:d} {:2d}:{:02d}:{:02d}".format(days, hours, minutes, secs)
 
 def putmoon( t, numlines, atfiller, notext, lang=None ):
     output = [""]
@@ -89,7 +89,7 @@ def putmoon( t, numlines, atfiller, notext, lang=None ):
     numcols = xrad * 2
   
     # Figure out some other random stuff
-    midlin = numlines / 2
+    midlin = int(numlines / 2)
     phases, which = phasehunt2( jd )
   
     # Now output the moon, a slice at a time
@@ -168,7 +168,7 @@ args = vars(parser.parse_args())
 try:
     d = time.mktime( dateutil.parser.parse(args['date']).timetuple() )
 except Exception as e:
-    fatal("Can't parse date: %s" % args['date'])
+    fatal("Can't parse date: {}".format(args['date']))
 
 try:
     n = int( args['lines'] )
