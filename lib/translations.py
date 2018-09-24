@@ -28,4 +28,5 @@ LITS = {
     'zh_TW': [ "新月",      "上弦",             "滿月",         "下弦"              ],
     'ar': [ "المحاق","الربع الأول", "البدر",  "الربع الأخير"  ],
     'nb': [ "Nymåne",       "Første kvarter",   "Fullmåne",     "Siste kvarter"     ],
+    'nn': [ "Nymåne",       "Første kvarter",   "Fullmåne",     "Siste kvarter"     ],
 }
