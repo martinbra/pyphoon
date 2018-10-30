@@ -10,6 +10,7 @@ LITS = {
     'de': [ "Neumond",      "Erstes Viertel",   "Vollmond",     "Letztes Viertel"   ],
     'es': [ "Luna nueva",   "Cuarto creciente", "Luna Llena",   "Cuarto menguante"  ],
     'eo': [ "Novluno",      "Unua lunduono",    "Plenluno",     "Lasta lunduono"    ],
+    'fi': [ "Uusikuu",      "Kasvava puolikuu", "Täysikuu",     "Laskeva puolikuu"  ],
     'fr': [ "Nouvelle lune","Premier quartier", "Pleine lune",  "Dernier quartier"  ],
     'hr': [ "Mlađak",       "Prva četvrt",      "Uštap",        "Zadnja četvrt"     ],
     'it': [ "Luna nuova",   "Primo quarto",     "Luna piena",   "Ultimo quarto"     ],
