@@ -30,4 +30,5 @@ LITS = {
     'ar': [ "المحاق","الربع الأول", "البدر",  "الربع الأخير"  ],
     'nb': [ "Nymåne",       "Første kvarter",   "Fullmåne",     "Siste kvarter"     ],
     'nn': [ "Nymåne",       "Første kvarter",   "Fullmåne",     "Siste kvarter"     ],
+    'cy': [ "Lleuad Newydd",    "Chwarter Cyntaf",  "Lleuad Llawn", "Chwarter Olaf" ],
 }
