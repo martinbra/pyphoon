@@ -28,6 +28,9 @@
 # Ported to Python by Igor Chubin, 2016
 #
 
+from __future__ import print_function
+
+import sys
 from math import floor, sin, cos, sqrt, tan, atan, atan2, asin
 
 #  Astronomical constants 
@@ -81,7 +84,7 @@ def dcos(x):
 
 
 def fatal(s):
-    print >>sys.stderr, s
+    print(s, file=sys.stderr)
     sys.exit(1)
 
 #
