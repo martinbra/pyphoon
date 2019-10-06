@@ -3,7 +3,7 @@ ASCII Art Phase of the Moon (Python version)
 
 ![Screenshots](http://igor.chub.in/pyphoon/screenshot.png)
 
-Based on the original version of Jef Poskanzer <jef@mail.acme.com>
+Based on the original version of Jef Poskanzer <jef@mail.acme.com> (Twitter: @jef_poskanzer) 
 written in Pascal in 1979 (and later translated by himself into C, and now by me into Python).
 
 # Usage
