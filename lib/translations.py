@@ -14,6 +14,7 @@ LITS = {
     'fi': [ "Uusikuu",      "Kasvava puolikuu", "Täysikuu",     "Laskeva puolikuu"  ],
     'fr': [ "Nouvelle lune","Premier quartier", "Pleine lune",  "Dernier quartier"  ],
     'hr': [ "Mlađak",       "Prva četvrt",      "Uštap",        "Zadnja četvrt"     ],
+    'ia': [ "Nove lunio",   "Primo quarte",     "Plenilunio",   "Ultime quarte"     ],
     'it': [ "Luna nuova",   "Primo quarto",     "Luna piena",   "Ultimo quarto"     ],
     'ja': [ "新月",          "上弦",             "満月",          "下弦"               ],
     'nl': [ "Nieuwe maan",  "Eerste kwartier",  "Volle maan",   "Laatste kwartier"  ],
