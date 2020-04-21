@@ -8,7 +8,7 @@ LITS = {
     'cs': [ "Nov",          "První čtvrť",      "Úplněk",       "Poslední čtvrť"    ],
     'da': [ "Nymåne",       "Tiltagende",       "Fuldmåne",     "Aftagende"         ],
     'de': [ "Neumond",      "Erstes Viertel",   "Vollmond",     "Letztes Viertel"   ],
-    'ee': [ "Noorkuu",      "Esimene veerand",  "Täiskuu",      "Viimane veerand"   ],
+    'et': [ "Noorkuu",      "Esimene veerand",  "Täiskuu",      "Viimane veerand"   ],
     'el': [ "Νέα Σελήνη",   "Πρώτο τέταρτο",    "Πανσέληνος",   "Τελευταίο τέταρτο" ],
     'es': [ "Luna nueva",   "Cuarto creciente", "Luna Llena",   "Cuarto menguante"  ],
     'eo': [ "Novluno",      "Unua lunduono",    "Plenluno",     "Lasta lunduono"    ],
