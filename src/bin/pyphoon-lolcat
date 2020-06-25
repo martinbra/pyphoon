@@ -4,5 +4,5 @@ if ! which lolcat > /dev/null 2>&1 ; then
   echo Please install lolcat first >&2
   exit 1
 fi
-"$(dirname "$0")"/pyphoon "$@" | LANG=en_US.UTF-8 lolcat -f
+pyphoon "$@" | LANG=en_US.UTF-8 lolcat -f
 
