@@ -155,7 +155,7 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylin
                 # south - read moons from bottom-right to upper-left
                 # equivalent to rotate 180 degress or turn upside-down
                 if numlines == 6:
-                    char = background6[-1-lin][-col]
+                    char = background6[-1-lin][-col-1]
                 elif numlines == 18:
                     char = background18[-1-lin][-col]
                 elif numlines == 19:
