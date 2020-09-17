@@ -21,8 +21,8 @@ import dateutil.parser
 # sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), "lib"))
 # sys.path.append((os.path.dirname(os.path.dirname(__file__))))
 from src.lib.astro import unix_to_julian, phase, phasehunt2
-from src.lib.moons import background6, background18, background19, background21, background22, background23
-from src.lib.moons import background24, background29, background32
+from src.lib.moons import background6, background18, background19, background21, background22
+from src.lib.moons import background23, background24, background29, background32
 from src.lib.rotate import rotate
 from src.lib.translations import LITS
 
@@ -63,7 +63,7 @@ def putseconds(secs):
 
     return f"{days:d} {hours:2d}:{minutes:02d}:{secs:02d}"
 
-def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
+def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
     """ Print the moon
     """
     output = [""]
@@ -91,11 +91,11 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylin
     # Figure out the phase
     juliandate = unix_to_julian(datetimeobj)
     pctphase, _, _, _, _, _, _ = phase(juliandate)
-    
+
     # Fix waxes and wanes direction for south hemisphere
     if hemisphere == 'south':
         pctphase = 1 - pctphase
-        
+
     angphase = pctphase * 2.0 * PI
     mcap = -cos(angphase)
 
@@ -151,7 +151,7 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylin
                     char = background32[lin][col]
                 else:
                     char = '@'
-            else: 
+            else:
                 # south - read moons from bottom-right to upper-left
                 # equivalent to rotate 180 degress or turn upside-down
                 if numlines == 6:
@@ -174,10 +174,10 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylin
                     char = background32[-1-lin][-col]
                 else:
                     char = '@'
-                
+
                 #rotate char upside-down if needed
                 char = rotate(char)
-                
+
             if char != '@':
                 putchar(char)
             else:
@@ -241,10 +241,10 @@ def main():
         choices=['north', 'south'],
         default=DEFAULTHEMISPHERE
     )
-    
-    
-    
-    
+
+
+
+
     args = vars(parser.parse_args())
 
     try:
@@ -263,12 +263,12 @@ def main():
         notext = bool(args['notext'])
     except Exception as err:  # pylint: disable=broad-except
         print(err)
-        
+
     try:
         hemisphere = str(args['hemisphere'])
     except Exception as err:  # pylint: disable=broad-except
         print(err)
 
     print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere))
-    
+
 main()
