@@ -242,9 +242,6 @@ def main():
         default=DEFAULTHEMISPHERE
     )
 
-
-
-
     args = vars(parser.parse_args())
 
     try:
