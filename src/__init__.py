@@ -236,7 +236,7 @@ def main():
     )
     parser.add_argument(
         '-s', '--hemisphere',
-        help='Hemisphere from where to show moon [north/south]. North by default',
+        help='Hemisphere from where to show moon. North by default',
         required=False,
         choices=['north', 'south'],
         default=DEFAULTHEMISPHERE

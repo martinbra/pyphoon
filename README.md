@@ -27,8 +27,7 @@ optional arguments:
                         locale for that the phase of the Moon must be shown.
                         English by default
   -s {north,south}, --hemisphere {north,south}
-                        Hemisphere from where to show moon [north/south].
-                        North by default
+                        Hemisphere from where to show moon. North by default
 ~~~~
 
 By default the number of lines is 30 and the date is today.
