@@ -9,7 +9,7 @@ setup(
     url='https://github.com/chubin/pyphoon',
     author='Igor Chubin',
     author_email='igor@chub.in',
-    version='0.1',
+    version='0.2',
     entry_points={
         'console_scripts': [
             'pyphoon=src:main'

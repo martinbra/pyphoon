@@ -267,5 +267,3 @@ def main():
         print(err)
 
     print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere))
-
-main()
