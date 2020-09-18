@@ -19,9 +19,11 @@ import dateutil.parser
 
 
 # sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), "lib"))
+# sys.path.append((os.path.dirname(os.path.dirname(__file__))))
 from src.lib.astro import unix_to_julian, phase, phasehunt2
-from src.lib.moons import background6, background18, background19, background21, background22, background23
-from src.lib.moons import background24, background29, background32
+from src.lib.moons import background6, background18, background19, background21, background22
+from src.lib.moons import background23, background24, background29, background32
+from src.lib.rotate import rotate
 from src.lib.translations import LITS
 
 def fatal(message):
@@ -41,6 +43,7 @@ PI = 3.1415926535897932384626433
 
 DEFAULTNUMLINES = 23
 DEFAULTNOTEXT = False
+DEFAULTHEMISPHERE = 'north'
 
 QUARTERLITLEN = 16
 QUARTERLITLENPLUSONE = 17
@@ -60,7 +63,7 @@ def putseconds(secs):
 
     return f"{days:d} {hours:2d}:{minutes:02d}:{secs:02d}"
 
-def putmoon(datetimeobj, numlines, atfiller, notext, lang=None):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
+def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
     """ Print the moon
     """
     output = [""]
@@ -88,6 +91,11 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang=None):  # pylint: disa
     # Figure out the phase
     juliandate = unix_to_julian(datetimeobj)
     pctphase, _, _, _, _, _, _ = phase(juliandate)
+
+    # Fix waxes and wanes direction for south hemisphere
+    if hemisphere == 'south':
+        pctphase = 1 - pctphase
+
     angphase = pctphase * 2.0 * PI
     mcap = -cos(angphase)
 
@@ -121,26 +129,55 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang=None):  # pylint: disa
             putchar(' ')
             col += 1
         while col <= colright:
-            if numlines == 6:
-                char = background6[lin][col]
-            elif numlines == 18:
-                char = background18[lin][col]
-            elif numlines == 19:
-                char = background19[lin][col]
-            elif numlines == 21:
-                char = background21[lin][col]
-            elif numlines == 22:
-                char = background22[lin][col]
-            elif numlines == 23:
-                char = background23[lin][col]
-            elif numlines == 24:
-                char = background24[lin][col]
-            elif numlines == 29:
-                char = background29[lin][col]
-            elif numlines == 32:
-                char = background32[lin][col]
+            if hemisphere == 'north':
+                # north - read moons from upper-left to bottom-right
+                if numlines == 6:
+                    char = background6[lin][col]
+                elif numlines == 18:
+                    char = background18[lin][col]
+                elif numlines == 19:
+                    char = background19[lin][col]
+                elif numlines == 21:
+                    char = background21[lin][col]
+                elif numlines == 22:
+                    char = background22[lin][col]
+                elif numlines == 23:
+                    char = background23[lin][col]
+                elif numlines == 24:
+                    char = background24[lin][col]
+                elif numlines == 29:
+                    char = background29[lin][col]
+                elif numlines == 32:
+                    char = background32[lin][col]
+                else:
+                    char = '@'
             else:
-                char = '@'
+                # south - read moons from bottom-right to upper-left
+                # equivalent to rotate 180 degress or turn upside-down
+                if numlines == 6:
+                    char = background6[-1-lin][-col]
+                elif numlines == 18:
+                    char = background18[-1-lin][-col]
+                elif numlines == 19:
+                    char = background19[-1-lin][-col]
+                elif numlines == 21:
+                    char = background21[-1-lin][-col]
+                elif numlines == 22:
+                    char = background22[-1-lin][-col]
+                elif numlines == 23:
+                    char = background23[-1-lin][-col]
+                elif numlines == 24:
+                    char = background24[-1-lin][-col]
+                elif numlines == 29:
+                    char = background29[-1-lin][-col]
+                elif numlines == 32:
+                    char = background32[-1-lin][-col]
+                else:
+                    char = '@'
+
+                #rotate char upside-down if needed
+                char = rotate(char)
+
             if char != '@':
                 putchar(char)
             else:
@@ -197,6 +234,14 @@ def main():
         nargs='?',
         default=None
     )
+    parser.add_argument(
+        '-s', '--hemisphere',
+        help='Hemisphere from where to show moon. North by default',
+        required=False,
+        choices=['north', 'south'],
+        default=DEFAULTHEMISPHERE
+    )
+
     args = vars(parser.parse_args())
 
     try:
@@ -216,4 +261,9 @@ def main():
     except Exception as err:  # pylint: disable=broad-except
         print(err)
 
-    print(putmoon(dateobj, numlines, '@', notext, lang))
+    try:
+        hemisphere = str(args['hemisphere'])
+    except Exception as err:  # pylint: disable=broad-except
+        print(err)
+
+    print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere))

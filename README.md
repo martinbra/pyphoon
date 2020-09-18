@@ -26,6 +26,8 @@ optional arguments:
   -l [LANGUAGE], --language [LANGUAGE]
                         locale for that the phase of the Moon must be shown.
                         English by default
+  -s {north,south}, --hemisphere {north,south}
+                        Hemisphere from where to show moon. North by default
 ~~~~
 
 By default the number of lines is 30 and the date is today.
@@ -54,3 +56,4 @@ Displayed information:
 There are several changes in PyPhoon that were not present in the original Jef Pokazner's version of 1979:
 
 * Localization: pyphoon is translated into many languages; language is configured using the system locale (`$LANG`)
+* Hemisphere: pyphoon can show the moon as seen from the north or south hemisphere (south hemisphere is upside-down, waxes and wanes in the opposite direction).
