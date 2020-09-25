@@ -196,9 +196,16 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere,south_warn
                 fputs(nqlits[int(which[1] * 4.0 + 0.001)])
             elif lin == midlin + 1:
                 fputs(putseconds(int((phases[1] - juliandate) * SECSPERDAY)))
+            elif lin == midlin + 2:
+                if south_warning:
+                    fputs('As seen from south hemisphere (opt1)')
 
         putchar('\n')
         lin += 1
+    
+    if south_warning:
+        fputs('As seen from south hemisphere (opt2)')
+        putchar('\n')
 
     return output[0]
 
@@ -245,7 +252,7 @@ def main():
     )
 
     hemisphere_group.add_argument(
-        '-S', '--hemisphere-warning',
+        '-S', '--hemispherewarning',
         help=('The same as -s and --hemisphere, but shows a warning text when showing it '
               'from the south hemisphere. North by default'
         ),
