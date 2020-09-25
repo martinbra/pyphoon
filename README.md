@@ -10,7 +10,9 @@ written in Pascal in 1979 (and later translated by himself into C, and now by me
 
 ~~~~
 $ pyphoon --help
-usage: pyphoon [-h] [-n LINES] [-x] [-l [LANGUAGE]] [date]
+usage: pyphoon [-h] [-n LINES] [-x] [-l [LANGUAGE]]
+               [-s {north,south} | -S {north,south}]
+               [date]
 
 Show Phase of the Moon
 
@@ -28,6 +30,10 @@ optional arguments:
                         English by default
   -s {north,south}, --hemisphere {north,south}
                         Hemisphere from where to show moon. North by default
+  -S {north,south}, --hemispherewarning {north,south}
+                        The same as -s and --hemisphere, but shows a warning
+                        text when showing it from the south hemisphere. North
+                        by default
 ~~~~
 
 By default the number of lines is 30 and the date is today.
