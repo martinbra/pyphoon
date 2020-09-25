@@ -24,7 +24,7 @@ from src.lib.astro import unix_to_julian, phase, phasehunt2
 from src.lib.moons import background6, background18, background19, background21, background22
 from src.lib.moons import background23, background24, background29, background32
 from src.lib.rotate import rotate
-from src.lib.translations import LITS
+from src.lib.translations import LITS, SOUTH_WARNING
 
 def fatal(message):
     """ Print error message and exit signaling failure
@@ -63,7 +63,7 @@ def putseconds(secs):
 
     return f"{days:d} {hours:2d}:{minutes:02d}:{secs:02d}"
 
-def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere,south_warning):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
+def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, south_warning):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
     """ Print the moon
     """
     output = [""]
@@ -198,13 +198,15 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere,south_warn
                 fputs(putseconds(int((phases[1] - juliandate) * SECSPERDAY)))
             elif lin == midlin + 2:
                 if south_warning:
-                    fputs('As seen from south hemisphere (opt1)')
+                    msg = SOUTH_WARNING.get(lang, SOUTH_WARNING.get('en'))
+                    fputs(f'{msg} (opt1)')
 
         putchar('\n')
         lin += 1
     
     if south_warning:
-        fputs('As seen from south hemisphere (opt2)')
+        msg = SOUTH_WARNING.get(lang, SOUTH_WARNING.get('en'))
+        fputs(f'{msg} (opt2)')
         putchar('\n')
 
     return output[0]
