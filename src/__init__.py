@@ -63,7 +63,7 @@ def putseconds(secs):
 
     return f"{days:d} {hours:2d}:{minutes:02d}:{secs:02d}"
 
-def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
+def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere,south_warning):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
     """ Print the moon
     """
     output = [""]
@@ -234,12 +234,23 @@ def main():
         nargs='?',
         default=None
     )
-    parser.add_argument(
+
+
+    hemisphere_group = parser.add_mutually_exclusive_group()
+    hemisphere_group.add_argument(
         '-s', '--hemisphere',
         help='Hemisphere from where to show moon. North by default',
         required=False,
-        choices=['north', 'south'],
-        default=DEFAULTHEMISPHERE
+        choices=['north', 'south']
+    )
+
+    hemisphere_group.add_argument(
+        '-S', '--hemisphere-warning',
+        help=('The same as -s and --hemisphere, but shows a warning text when showing it '
+              'from the south hemisphere. North by default'
+        ),
+        required=False,
+        choices=['north', 'south']
     )
 
     args = vars(parser.parse_args())
@@ -266,4 +277,14 @@ def main():
     except Exception as err:  # pylint: disable=broad-except
         print(err)
 
-    print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere))
+    try:
+        hemisphere_warning = str(args['hemispherewarning'])
+    except Exception as err:  # pylint: disable=broad-except
+        print(err)
+
+    south_warning = hemisphere_warning == "south"
+
+    if hemisphere == "None":
+        hemisphere = hemisphere_warning if hemisphere_warning != 'None' else DEFAULTHEMISPHERE
+
+    print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere, south_warning))
