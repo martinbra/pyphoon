@@ -82,8 +82,8 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, south_war
         lang = lang.split('_', 1)[0]
 
     lits = LITS.get(lang, LITS.get('en'))
-    qlits = [x + " +" for x in lits]
-    nqlits = [x + " -" for x in lits]
+    qlits = [x + " +" for x in lits[:4]]
+    nqlits = [x + " -" for x in lits[:4]]
 
     # Find the length of the atfiller string
     atflrlen = len(atfiller)
@@ -197,17 +197,12 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, south_war
             elif lin == midlin + 1:
                 fputs(putseconds(int((phases[1] - juliandate) * SECSPERDAY)))
             elif lin == midlin + 2:
-                if south_warning:
-                    msg = SOUTH_WARNING.get(lang, SOUTH_WARNING.get('en'))
-                    fputs(f'{msg} (opt1)')
+                if south_warning:                    
+                    msg = LITS.get(lang, LITS.get('en'))[5]
+                    fputs(msg)
 
         putchar('\n')
         lin += 1
-    
-    if south_warning:
-        msg = SOUTH_WARNING.get(lang, SOUTH_WARNING.get('en'))
-        fputs(f'{msg} (opt2)')
-        putchar('\n')
 
     return output[0]
 
