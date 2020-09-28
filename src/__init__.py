@@ -24,7 +24,7 @@ from src.lib.astro import unix_to_julian, phase, phasehunt2
 from src.lib.moons import background6, background18, background19, background21, background22
 from src.lib.moons import background23, background24, background29, background32
 from src.lib.rotate import rotate
-from src.lib.translations import LITS, SOUTH_WARNING
+from src.lib.translations import LITS
 
 def fatal(message):
     """ Print error message and exit signaling failure
@@ -197,9 +197,9 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, south_war
             elif lin == midlin + 1:
                 fputs(putseconds(int((phases[1] - juliandate) * SECSPERDAY)))
             elif lin == midlin + 2:
-                if south_warning:                    
+                if south_warning:
                     msg = LITS.get(lang, LITS.get('en'))[5]
-                    fputs(msg)
+                    fputs(f'({msg})')
 
         putchar('\n')
         lin += 1

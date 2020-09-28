@@ -3,6 +3,7 @@
 """
 
 LITS = {
+    # pylint: disable=line-too-long
     'en': ["New Moon", "First Quarter", "Full Moon", "Last Quarter", "Nothern Hemisphere", "Southern Hemishpere"],
     'be': ["Маладзік", "Першая чвэрць", "Поўня", "Апошняя чвэрць", "Паўночнае паўшар’е", "Паўднёвае паўшар’е"],
     'bg': ["Новолуние", "Първа четвърт", "Пълнолуние", "Последна четвърт"],
