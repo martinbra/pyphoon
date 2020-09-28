@@ -249,8 +249,8 @@ def main():
 
     hemisphere_group.add_argument(
         '-S', '--hemispherewarning',
-        help=('The same as -s and --hemisphere, but shows a warning text when showing it '
-              'from the south hemisphere. North by default'
+        help=('The same as -s and --hemisphere, but shows a reminder under the phase text '
+              'when showing it from the south hemisphere. North by default'
         ),
         required=False,
         choices=['north', 'south']
