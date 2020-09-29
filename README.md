@@ -53,13 +53,31 @@ Displayed information:
 * time to the next state (+)
 * Hemisphere from where the moon was displayed (if the -S switch is used).
 
-# Dependencies
-
-* dateutil
-
 # Own changes
 
 There are several changes in PyPhoon that were not present in the original Jef Pokazner's version of 1979:
 
 * Localization: pyphoon is translated into many languages; language is configured using the system locale (`$LANG`)
 * Hemisphere: pyphoon can show the moon as seen from the north or south hemisphere (south hemisphere is upside-down, waxes and wanes in the opposite direction).
+
+# Dependencies
+
+* dateutil
+
+# Installation
+
+Assuming that **git**, **python** and **pip** are already installed,
+install pyphoon with the following commands in your O.S. terminal (bash, command prompt, powershell, etc):
+
+```
+git clone https://github.com/chubin/pyphoon
+cd pyphoon
+pip install -r requirements.txt
+python setup.py install
+```
+after that you can simply call `pyphoon` from your terminal.
+
+If you don't have git installed to use `git clone`, it's possible to [download](https://github.com/chubin/pyphoon/archive/master.zip) this repository and unzip it instead.
+
+Depending on your O.S. it may be needed to prepend `sudo` to `python setup.py install`, 
+or even change `python` to `python3` and `pip` to `pip3`. 
