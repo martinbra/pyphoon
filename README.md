@@ -31,9 +31,8 @@ optional arguments:
   -s {north,south}, --hemisphere {north,south}
                         Hemisphere from where to show moon. North by default
   -S {north,south}, --hemispherewarning {north,south}
-                        The same as -s and --hemisphere, but shows a reminder
-                        under the phase text when showing it from the south
-                        hemisphere. North by default
+                        The same as -s and --hemisphere, but shows an
+                        hemisphere reminder under the phase text.
 ~~~~
 
 By default the number of lines is 30 and the date is today.

@@ -63,7 +63,7 @@ def putseconds(secs):
 
     return f"{days:d} {hours:2d}:{minutes:02d}:{secs:02d}"
 
-def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, south_warning):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
+def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, hemisphere_warning):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
     """ Print the moon
     """
     output = [""]
@@ -196,9 +196,10 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, south_war
                 fputs(nqlits[int(which[1] * 4.0 + 0.001)])
             elif lin == midlin + 1:
                 fputs(putseconds(int((phases[1] - juliandate) * SECSPERDAY)))
-            elif lin == midlin + 2 and south_warning:
-                msg = LITS.get(lang, LITS.get('en'))[5]
-                fputs(f'({msg})')
+            elif lin == midlin + 2 and hemisphere_warning != 'None':
+                north_south = LITS.get(lang, LITS.get('en'))[4:6]
+                msg = north_south[hemisphere == 'south']
+                fputs(f'[{msg}]')
 
         putchar('\n')
         lin += 1
@@ -249,9 +250,9 @@ def main():
 
     hemisphere_group.add_argument(
         '-S', '--hemispherewarning',
-        help=('The same as -s and --hemisphere, but shows a reminder under the phase text '
-              'when showing it from the south hemisphere. North by default'
-        ),
+        help=('The same as -s and --hemisphere, but shows an hemisphere '
+              'reminder under the phase text.'
+             ),
         required=False,
         choices=['north', 'south']
     )
@@ -285,9 +286,7 @@ def main():
     except Exception as err:  # pylint: disable=broad-except
         print(err)
 
-    south_warning = hemisphere_warning == 'south'
-
     if hemisphere == 'None':
         hemisphere = hemisphere_warning if hemisphere_warning != 'None' else DEFAULTHEMISPHERE
 
-    print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere, south_warning))
+    print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere, hemisphere_warning))
