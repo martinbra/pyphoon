@@ -37,7 +37,7 @@ optional arguments:
 
 By default the number of lines is 30 and the date is today.
 
-The Moon is (at the moment) shown only for the northern hemisphere.
+The Moon can be shown as seen from both the northern (default) and southern hemisphere.
 
 Supported dateformats:
 
@@ -51,6 +51,7 @@ Displayed information:
 
 * time after the previous state (-)
 * time to the next state (+)
+* Hemisphere from where the moon was displayed (if the -S switch is used).
 
 # Dependencies
 
