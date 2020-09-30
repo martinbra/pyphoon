@@ -29,7 +29,7 @@ optional arguments:
                         locale for that the phase of the Moon must be shown.
                         English by default
   -s {north,south}, --hemisphere {north,south}
-                        Hemisphere from where to show moon. North by default
+                        Earth hemisphere from which to observe the Moon. North by default
   -S {north,south}, --hemispherewarning {north,south}
                         The same as -s and --hemisphere, but shows an
                         hemisphere reminder under the phase text.
@@ -37,7 +37,20 @@ optional arguments:
 
 By default the number of lines is 30 and the date is today.
 
-The Moon can be shown as seen from both the northern (default) and southern hemisphere.
+Pyphoon only displays the [near side](https://en.wikipedia.org/wiki/Near_side_of_the_Moon) of the Moon
+because the [far side](https://en.wikipedia.org/wiki/Far_side_of_the_Moon) is never visible from Earth.
+This said, the near side either shows North pole up
+(for people living in northern Earth hemisphere)
+or South pole up
+(for people living in southern Earth hemisphere).
+This in turn changes the direction of the observable crescent:
+*e.g.* 🌒 or 🌘 for the first quarter.
+To accomodate this, pyphoon draws the moon as seen from either hemisphere on request,
+defaulting to `-s north`ern hemisphere.
+If you happen to live in equatorial zones,
+then the Moon shows either pole up
+depending on [how you rotate your feet](https://www.unicode.org/L2/L2017/17304-moon-var.pdf),
+so you only need to pick the one you like most. 
 
 Supported dateformats:
 
@@ -51,7 +64,7 @@ Displayed information:
 
 * time after the previous state (-)
 * time to the next state (+)
-* Hemisphere from where the moon was displayed (if the -S switch is used).
+* Hemisphere from which the moon is observed (with `-S` switch on).
 
 # Own changes
 
