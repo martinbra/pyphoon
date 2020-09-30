@@ -66,6 +66,10 @@ There are several changes in PyPhoon that were not present in the original Jef P
 
 # Installation
 
+**Latest version:**
+`pip install git+https://github.com/chubin/pyphoon.git`. Append `--upgrade` if you have an older version.
+
+**Longer way:**
 Assuming that **git**, **python** and **pip** are already installed,
 install pyphoon with the following commands in your O.S. terminal (bash, command prompt, powershell, etc):
 
@@ -75,6 +79,9 @@ cd pyphoon
 pip install -r requirements.txt
 python setup.py install
 ```
+
+
+
 after that you can simply call `pyphoon` from your terminal.
 
 If you don't have git installed to use `git clone`, it's possible to [download](https://github.com/chubin/pyphoon/archive/master.zip) this repository and unzip it instead.
