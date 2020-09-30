@@ -197,7 +197,11 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, hemispher
             elif lin == midlin + 1:
                 fputs(putseconds(int((phases[1] - juliandate) * SECSPERDAY)))
             elif lin == midlin + 2 and hemisphere_warning != 'None':
-                north_south = LITS.get(lang, LITS.get('en'))[4:6]
+                # if LITS has hemisphere translation
+                if len(lits) >= 6:
+                    north_south = lits[4:6]
+                else:
+                    north_south = LITS.get('en')[4:6] #default to English
                 msg = north_south[hemisphere == 'south']
                 fputs(f'[{msg}]')
 
