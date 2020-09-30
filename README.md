@@ -29,7 +29,8 @@ optional arguments:
                         locale for that the phase of the Moon must be shown.
                         English by default
   -s {north,south}, --hemisphere {north,south}
-                        Earth hemisphere from which to observe the Moon. North by default
+                        Earth hemisphere from which to observe the Moon. North 
+						by default
   -S {north,south}, --hemispherewarning {north,south}
                         The same as -s and --hemisphere, but shows an
                         hemisphere reminder under the phase text.

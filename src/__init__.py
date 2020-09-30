@@ -243,7 +243,7 @@ def main():
     hemisphere_group = parser.add_mutually_exclusive_group()
     hemisphere_group.add_argument(
         '-s', '--hemisphere',
-        help='Hemisphere from where to show moon. North by default',
+        help='Earth hemisphere from which to observe the Moon. North by default',
         required=False,
         choices=['north', 'south']
     )
