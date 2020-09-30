@@ -81,9 +81,14 @@ There are several changes in PyPhoon that were not present in the original Jef P
 # Installation
 
 **Latest version:**
-`pip install git+https://github.com/chubin/pyphoon.git`. Append `--upgrade` if you have an older version.
+
+`pip install git+https://github.com/chubin/pyphoon.git`. 
+
+Append `--upgrade` if you have an older version.
+
 
 **Longer way:**
+
 Assuming that **git**, **python** and **pip** are already installed,
 install pyphoon with the following commands in your O.S. terminal (bash, command prompt, powershell, etc):
 
