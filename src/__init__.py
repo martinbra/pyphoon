@@ -63,7 +63,7 @@ def putseconds(secs):
 
     return f"{days:d} {hours:2d}:{minutes:02d}:{secs:02d}"
 
-def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
+def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, hemisphere_warning):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
     """ Print the moon
     """
     output = [""]
@@ -82,8 +82,8 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylin
         lang = lang.split('_', 1)[0]
 
     lits = LITS.get(lang, LITS.get('en'))
-    qlits = [x + " +" for x in lits]
-    nqlits = [x + " -" for x in lits]
+    qlits = [x + " +" for x in lits[:4]]
+    nqlits = [x + " -" for x in lits[:4]]
 
     # Find the length of the atfiller string
     atflrlen = len(atfiller)
@@ -196,6 +196,14 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere):  # pylin
                 fputs(nqlits[int(which[1] * 4.0 + 0.001)])
             elif lin == midlin + 1:
                 fputs(putseconds(int((phases[1] - juliandate) * SECSPERDAY)))
+            elif lin == midlin + 2 and hemisphere_warning != 'None':
+                # if LITS has hemisphere translation
+                if len(lits) >= 6:
+                    north_south = lits[4:6]
+                else:
+                    north_south = LITS.get('en')[4:6] #default to English
+                msg = north_south[hemisphere == 'south']
+                fputs(f'[{msg}]')
 
         putchar('\n')
         lin += 1
@@ -234,12 +242,23 @@ def main():
         nargs='?',
         default=None
     )
-    parser.add_argument(
+
+
+    hemisphere_group = parser.add_mutually_exclusive_group()
+    hemisphere_group.add_argument(
         '-s', '--hemisphere',
-        help='Hemisphere from where to show moon. North by default',
+        help='Earth hemisphere from which to observe the Moon. North by default',
         required=False,
-        choices=['north', 'south'],
-        default=DEFAULTHEMISPHERE
+        choices=['north', 'south']
+    )
+
+    hemisphere_group.add_argument(
+        '-S', '--hemispherewarning',
+        help=('The same as -s and --hemisphere, but shows an hemisphere '
+              'reminder under the phase text.'
+             ),
+        required=False,
+        choices=['north', 'south']
     )
 
     args = vars(parser.parse_args())
@@ -266,4 +285,12 @@ def main():
     except Exception as err:  # pylint: disable=broad-except
         print(err)
 
-    print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere))
+    try:
+        hemisphere_warning = str(args['hemispherewarning'])
+    except Exception as err:  # pylint: disable=broad-except
+        print(err)
+
+    if hemisphere == 'None':
+        hemisphere = hemisphere_warning if hemisphere_warning != 'None' else DEFAULTHEMISPHERE
+
+    print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere, hemisphere_warning))
