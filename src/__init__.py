@@ -16,6 +16,7 @@ import time
 import locale
 from math import cos, sqrt
 import dateutil.parser
+import pytz
 
 
 # sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), "lib"))
@@ -63,7 +64,7 @@ def putseconds(secs):
 
     return f"{days:d} {hours:2d}:{minutes:02d}:{secs:02d}"
 
-def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, hemisphere_warning):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments
+def putmoon(datetimeobj, timezone, numlines, atfiller, notext, lang, hemisphere, hemisphere_warning):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements,too-many-arguments,line-too-long
     """ Print the moon
     """
     output = [""]
@@ -208,6 +209,10 @@ def putmoon(datetimeobj, numlines, atfiller, notext, lang, hemisphere, hemispher
         putchar('\n')
         lin += 1
 
+    #Only for 0.3 debug purposes
+    #TODO: Only print when argument is given (no default?)
+    output[0] += f'Parsed timezone is {repr(timezone)}\n'
+
     return output[0]
 
 
@@ -232,9 +237,15 @@ def main():
     )
     parser.add_argument(
         'date',
-        help='Date for that the phase of the Moon must be shown. Today by default',
+        help='Date (and time) for that the phase of the Moon must be shown. Today (now) by default',
         nargs='?',
         default=time.strftime("%Y-%m-%d %H:%M:%S")
+    )
+    parser.add_argument(
+        '-t', '--timezone',
+        help='Timezone for Date/Time Reference for previous/next moon phase. UTC by default',
+        nargs='?',
+        default='UTC'
     )
     parser.add_argument(
         '-l', '--language',
@@ -269,6 +280,11 @@ def main():
         fatal(f"Can't parse date: {args['date']}")
 
     try:
+        timezone = pytz.timezone(args['timezone'])
+    except Exception as err:  # pylint: disable=broad-except
+        fatal(f"Can't parse timezone: {args['timezone']}")
+
+    try:
         numlines = int(args['lines'])
         lang = args['language']
     except Exception as err:  # pylint: disable=broad-except
@@ -293,4 +309,4 @@ def main():
     if hemisphere == 'None':
         hemisphere = hemisphere_warning if hemisphere_warning != 'None' else DEFAULTHEMISPHERE
 
-    print(putmoon(dateobj, numlines, '@', notext, lang, hemisphere, hemisphere_warning))
+    print(putmoon(dateobj, timezone, numlines, '@', notext, lang, hemisphere, hemisphere_warning))
